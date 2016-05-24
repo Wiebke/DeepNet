@@ -1,35 +1,3 @@
-install:
-  - cinst r.project
-
-before_build:
-  - nuget restore DeepNet-CI.sln -Verbosity quiet
-
-platform: x64
-configuration: Release
-build:
-  project: DeepNet-CI.sln
-  verbosity: minimal
-  
-assembly_info:
-  patch: true
-  file: AssemblyInfo.*
-  assembly_version: "{version}"
-  assembly_file_version: "{version}"
-  assembly_informational_version: "{version}"  
-  
-test:
-  categories:
-    except:
-      - Skip_CI
-
-artifacts:
-  - path: dist\Release\*.nupkg
-
-environment:
-  access_token:
-    secure: RLs8gRDVPiOjMQTgFUS8ZwSAZik+klFVV6kvdIfxz72dHFUJlUzAnuDH+qdztzMk
-
-
 -
   branches:
     only:
@@ -91,6 +59,37 @@ environment:
       api_key:
         secure: uVzfwaf8HYpirCVXO/sqI7Dh7i8K6pNkY2HmYrQG0x8dqSfU5HAzF6WAIgyvLTbF
       artifact: /.*\.nupkg/
+  
     
+-
+  install:
+    - cinst r.project
 
+  before_build:
+    - nuget restore DeepNet-CI.sln -Verbosity quiet
+
+  platform: x64
+  configuration: Release
+  build:
+    project: DeepNet-CI.sln
+    verbosity: minimal
+  
+  assembly_info:
+    patch: true
+    file: AssemblyInfo.*
+    assembly_version: "{version}"
+    assembly_file_version: "{version}"
+    assembly_informational_version: "{version}"  
+  
+  test:
+    categories:
+      except:
+        - Skip_CI
+
+  artifacts:
+    - path: dist\Release\*.nupkg
+
+  environment:
+    access_token:
+      secure: RLs8gRDVPiOjMQTgFUS8ZwSAZik+klFVV6kvdIfxz72dHFUJlUzAnuDH+qdztzMk
 
